@@ -1,81 +1,88 @@
-# C# Windows Forms TCP Client‑Server Application
+# C# Windows Forms TCP Server–Client Application
 
-A GUI‑driven TCP server and client built with Windows Forms, demonstrating real‑time message exchange, multithreading, and safe cross‑thread UI updates.
+A .NET-based TCP server and Windows Forms client showcasing multi-client communication, command broadcasting, and UI-driven connection management.
 
 ## Description
 
-This solution includes two WinForms projects:
+This repository contains two WinForms applications—a **Server** and a **Client**—that communicate over TCP:
 
-- **Server** (`WindowsFormsApp`)  
-  - Listens on a user‑specified port (default 5000)  
-  - Tracks and displays the number of connected clients  
-  - Shows incoming client messages in a scrolling log  
-  - Lets you broadcast a text command to all connected clients  
-  - Cleanly stops the listener and disconnects clients on demand  
+- **Server**:  
+  - Listens on a user‑specified port (default 5000) for incoming connections.  
+  - Accepts multiple clients using one background thread per connection.  
+  - Displays connection status and messages in a central status textbox.  
+  - Allows typing a command in the UI and broadcasting it to all connected clients.  
+  - Gracefully stops and disconnects all clients on demand.
 
-- **Client** (`WindowsFormsAppClient`)  
-  - Connects to a server IP/port of your choice  
-  - Sends a “hello” message on connect and displays server responses in real time  
-  - Allows sending text commands to the server  
-  - Supports graceful disconnect at any time  
+- **Client**:  
+  - Connects to the server at a specified IP address (default 127.0.0.1) and port.  
+  - Sends an initial greeting message and processes server replies in real time.  
+  - Displays incoming server messages in its own UI.  
+  - Lets the user send commands back to the server.  
+  - Supports clean disconnect and re‑connect without restarting the application.
 
-Both apps use a shared `InvokeEx` extension for `ISynchronizeInvoke` to marshal updates onto the UI thread safely.
+Both projects share an `InvokeEx` extension method to marshal background‑thread updates safely onto the UI thread.
 
 ## Key Features
 
-- **GUI Control**: Start/Stop server and Connect/Disconnect client via buttons  
-- **Multithreading**: Dedicated background threads for listening and processing network I/O  
-- **Safe UI Updates**: `InvokeEx` extension avoids cross‑thread exceptions when updating controls  
-- **Real‑Time Messaging**: Bidirectional command/response workflow between server and clients  
-- **Client Management**: Automatic tracking of connected clients with count display  
+- **Multi‑Client Support**  
+  Dedicated background thread per client on the server side for true concurrent handling.
+
+- **Command Broadcasting**  
+  Type in a command on the server UI and push it out to every connected client at once.
+
+- **Thread‑Safe UI Updates**  
+  `InvokeEx` extension ensures cross‑thread calls update the WinForms controls correctly.
+
+- **Graceful Shutdown**  
+  Server can stop listening, close all client connections, and reset its UI without forcing the process to exit.
 
 ## Prerequisites
 
-- .NET Framework 4.7.2 (or later)  
-- Visual Studio 2019 (or later) with Windows Forms support  
+- **.NET Framework 4.7.2** (or higher)  
+- **Visual Studio 2017** (or higher) / Visual Studio Community Edition  
+- Windows OS (WinForms applications)
 
 ## Setup & Usage
 
 1. **Clone the repository**  
-   git clone https://github.com/your-username/csharp-winforms-tcp-chat.git  
-   cd csharp-winforms-tcp-chat
+   ```bash
+   git clone https://github.com/your-username/csharp-winform-tcp.git
+   cd csharp-winform-tcp
+   ```
 
 2. **Open the solution**  
-   Launch `CSharpWinFormsTcpChat.sln` in Visual Studio.
+   - Double‑click `WindowsFormsApp.sln` in Visual Studio.
 
 3. **Build the solution**  
-   Build → Rebuild Solution
+   - Choose **Build → Build Solution** (or press **Ctrl+Shift+B**).
 
 4. **Run the Server**  
-   - Right‑click `WindowsFormsApp` → Set as Startup Project  
-   - Press F5  
-   - Enter a port (e.g. 5000) and click Start Server
+   - Set the **WindowsFormsApp** project as Startup.  
+   - Press **F5**.  
+   - Enter a port (or leave 5000), then click **Start Server**.
 
-5. **Run the Client**  
-   - Right‑click `WindowsFormsAppClient` → Set as Startup Project  
-   - Press F5  
-   - Enter server IP (e.g. 127.0.0.1) and port, click Connect
+5. **Run one or more Clients**  
+   - In Visual Studio, right‑click **WindowsFormsAppClient** and choose **Set as Startup Project**, then **Start**.  
+   - Enter the server IP (e.g. `127.0.0.1`) and port (`5000`), then click **Connect**.  
+   - Type commands in the client UI to send to the server; server replies appear in both UIs.
 
-6. **Chat & Command**  
-   - On the client form, type a command and click Send Command  
-   - Watch the server log update, and the client receive responses  
-   - Use Disconnect on the client or Stop Server on the server to tear down  
+6. **Shut down**  
+   - Use **Stop Server** on the server form to disconnect all clients.  
+   - Use **Disconnect** on the client form to safely close the connection.
 
 ## Project Structure
 
-/WindowsFormsApp  
-├── Form1.cs                      # Server GUI logic  
-├── Form1.Designer.cs             # Server form layout  
-└── Utils/ISynchronizeInvokeExtensions.cs  # UI‑thread helper  
-
-/WindowsFormsAppClient  
-├── Form1.cs                      # Client GUI logic  
-├── Form1.Designer.cs             # Client form layout  
-└── Utils/ISynchronizeInvokeExtensions.cs  # UI‑thread helper  
-
-/Program.cs                        # Entry point (if separate)  
-/README.md                         # Project documentation  
-/LICENSE                           # MIT License  
+```
+├── WindowsFormsApp/               # Server project
+│   ├── Form1.cs                   # Main server form and logic
+│   ├── ISynchronizeInvokeExtensions.cs  # InvokeEx extension for thread‑safe UI updates
+│   └── Program.cs                 # Server application entry point
+├── WindowsFormsAppClient/         # Client project
+│   ├── Form1.cs                   # Main client form and logic
+│   ├── ISynchronizeInvokeExtensions.cs  # Same InvokeEx helper
+│   └── Program.cs                 # Client application entry point
+└── README.md                      # This documentation
+```
 
 ## License
 
