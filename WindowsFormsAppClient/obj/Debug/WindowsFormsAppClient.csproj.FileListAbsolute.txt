@@ -1,0 +1,10 @@
+C:\Users\Rautu\Desktop\MPP-C#\ClientsServer\WindowsFormsAppClient\bin\Debug\WindowsFormsAppClient.exe.config
+C:\Users\Rautu\Desktop\MPP-C#\ClientsServer\WindowsFormsAppClient\bin\Debug\WindowsFormsAppClient.exe
+C:\Users\Rautu\Desktop\MPP-C#\ClientsServer\WindowsFormsAppClient\bin\Debug\WindowsFormsAppClient.pdb
+C:\Users\Rautu\Desktop\MPP-C#\ClientsServer\WindowsFormsAppClient\obj\Debug\WindowsFormsAppClient.csproj.AssemblyReference.cache
+C:\Users\Rautu\Desktop\MPP-C#\ClientsServer\WindowsFormsAppClient\obj\Debug\WindowsFormsAppClient.Form1.resources
+C:\Users\Rautu\Desktop\MPP-C#\ClientsServer\WindowsFormsAppClient\obj\Debug\WindowsFormsAppClient.Properties.Resources.resources
+C:\Users\Rautu\Desktop\MPP-C#\ClientsServer\WindowsFormsAppClient\obj\Debug\WindowsFormsAppClient.csproj.GenerateResource.cache
+C:\Users\Rautu\Desktop\MPP-C#\ClientsServer\WindowsFormsAppClient\obj\Debug\WindowsFormsAppClient.csproj.CoreCompileInputs.cache
+C:\Users\Rautu\Desktop\MPP-C#\ClientsServer\WindowsFormsAppClient\obj\Debug\WindowsFormsAppClient.exe
+C:\Users\Rautu\Desktop\MPP-C#\ClientsServer\WindowsFormsAppClient\obj\Debug\WindowsFormsAppClient.pdb
